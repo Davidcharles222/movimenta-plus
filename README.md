@@ -153,7 +153,9 @@ Live Server (VS Code)
 
 # 🌐 Deploy
 
-O projeto será publicado futuramente utilizando Vercel.
+O projeto está disponível online:
+
+https://movimenta-plus.vercel.app/login.html
 
 ---
 
