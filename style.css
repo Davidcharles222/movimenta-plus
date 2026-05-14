@@ -1,0 +1,1002 @@
+/* =========================================
+   RESET E CONFIGURAÇÕES GLOBAIS
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #12121a 0%, #0b0b11 100%);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: rgba(139, 92, 246, 0.15);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  filter: blur(80px);
+  z-index: -1;
+}
+
+button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #8b5cf6;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #7c3aed;
+  transform: scale(1.05);
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL
+========================================= */
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  text-align: center;
+  animation: aparecer 0.5s ease;
+}
+
+h1 {
+  color: #8b5cf6;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.subtitulo {
+  color: #b5b5b5;
+  margin-bottom: 30px;
+}
+
+.card {
+  border-radius: 24px;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  background: rgba(26, 26, 34, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.25);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.35);
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   TOPO DA HOME
+========================================= */
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 30px;
+}
+
+.saudacao {
+  color: #b5b5b5;
+  margin-bottom: 5px;
+}
+
+.topo h2 {
+  font-size: 24px;
+}
+
+.acoes-topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notificacao {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #1a1a22;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8b5cf6;
+  font-size: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+}
+
+.avatar-topo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.45);
+}
+
+.avatar-topo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+/* =========================================
+   CARD PRINCIPAL DO TREINO
+========================================= */
+.exercicio {
+  color: #d1d1d1;
+  margin-bottom: 20px;
+}
+
+.exercicio strong {
+  color: white;
+}
+
+.controle-intensidade {
+  margin: 20px 0;
+  color: #d1d1d1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.controle-intensidade select,
+.campo-perfil select,
+.objetivo-usuario select {
+  background: #22222c;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+}
+
+.perfil-usuario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.campo-perfil,
+.objetivo-usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.campo-perfil label,
+.objetivo-usuario label {
+  color: #b5b5b5;
+  font-size: 14px;
+}
+
+.objetivo-usuario {
+  margin-top: 18px;
+}
+
+/* =========================================
+   CRONÔMETRO CIRCULAR
+========================================= */
+.circulo {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 30px auto;
+}
+
+svg {
+  transform: rotate(-90deg);
+}
+
+#progresso {
+  stroke-dasharray: 565;
+  stroke-dashoffset: 0;
+  transition: 1s linear;
+}
+
+#tempo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 72px;
+  font-weight: bold;
+  color: #8b5cf6;
+}
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.series {
+  color: #d1d1d1;
+}
+
+#series {
+  color: #8b5cf6;
+  font-weight: bold;
+}
+
+/* =========================================
+   MOTIVAÇÃO, META E ASSISTENTE
+========================================= */
+.mensagem-motivacional {
+  margin: 18px 0 5px;
+  text-align: center;
+}
+
+.mensagem-motivacional p {
+  color: #d8d8d8;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.meta-container {
+  margin: 10px 0 25px;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #d8d8d8;
+  font-size: 14px;
+}
+
+#porcentagemMeta {
+  color: #8b5cf6;
+  font-weight: bold;
+}
+
+.barra-meta {
+  width: 100%;
+  height: 14px;
+  background: #22222c;
+  border-radius: 20px;
+  margin: 15px 0 25px;
+  overflow: hidden;
+}
+
+.progresso-meta {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.assistente-card {
+  background: rgba(26, 26, 34, 0.9);
+  border-radius: 20px;
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.12);
+  text-align: left;
+}
+
+.assistente-card h3 {
+  color: #8b5cf6;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.assistente-card p {
+  color: #d8d8d8;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* =========================================
+   CARDS DE RESUMO
+========================================= */
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.mini-card {
+  background: #1a1a22;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+}
+
+.mini-card h3 {
+  font-size: 14px;
+  color: #b5b5b5;
+  margin-bottom: 10px;
+}
+
+.mini-card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #8b5cf6;
+}
+
+/* =========================================
+   PRÓXIMO TREINO
+========================================= */
+.proximo-treino {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.titulo-secao {
+  margin-bottom: 15px;
+}
+
+.titulo-secao h2 {
+  font-size: 22px;
+}
+
+.treino-card {
+  width: 100%;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
+}
+
+.treino-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+}
+
+.treino-card:active {
+  transform: scale(0.98);
+}
+
+.categoria {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.treino-card h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.duracao {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-play {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: #8b5cf6;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* =========================================
+   MENU INFERIOR
+========================================= */
+.menu-inferior {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 420px;
+  background: #1a1a22;
+  border-radius: 24px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.menu-inferior a {
+  color: #b5b5b5;
+  text-decoration: none;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-inferior a span {
+  font-size: 12px;
+}
+
+.menu-inferior a.ativo {
+  color: #8b5cf6;
+}
+
+/* =========================================
+   LOGIN E CADASTRO
+========================================= */
+.login-body {
+  background: linear-gradient(135deg, #6d28d9, #0b0b11);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(20, 20, 28, 0.95);
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.35);
+}
+
+.login-ilustracao {
+  padding: 60px;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.9),
+    rgba(91, 33, 182, 0.95)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-ilustracao h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.login-ilustracao p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.icone-praca {
+  font-size: 70px;
+  margin-top: 40px;
+}
+
+.login-card {
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-card h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.login-subtitulo {
+  color: #b5b5b5;
+  margin-bottom: 30px;
+}
+
+.login-card label {
+  margin-bottom: 8px;
+  color: #d8d8d8;
+}
+
+.login-card input,
+.recuperar-card input,
+.conta-card input {
+  background: #22222c;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+.login-card input {
+  margin-bottom: 20px;
+}
+
+.login-card button {
+  margin-top: 10px;
+}
+
+.login-link {
+  margin-top: 25px;
+  color: #b5b5b5;
+}
+
+.login-link a {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* =========================================
+   MODAL RECUPERAR SENHA
+========================================= */
+.recuperar-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 420px;
+  background: rgba(26, 26, 34, 0.98);
+  border-radius: 24px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.recuperar-card.ativo {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.recuperar-card input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.btn-secundario {
+  width: 100%;
+  margin-top: 12px;
+  background: #22222c;
+}
+
+.btn-secundario:hover {
+  background: #333344;
+}
+
+/* =========================================
+   PERFIL
+========================================= */
+.perfil-card {
+  text-align: center;
+}
+
+.foto-perfil {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: white;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+}
+
+.foto-perfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.perfil-card h1 {
+  margin-bottom: 10px;
+}
+
+#inputFotoPerfil {
+  display: none;
+}
+
+.botao-foto {
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  background: #8b5cf6;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-foto:hover {
+  transform: scale(1.05);
+  background: #7c3aed;
+}
+
+.estatisticas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info {
+  background: #22222c;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.info h3 {
+  color: #b5b5b5;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.info p {
+  color: #8b5cf6;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.conta-card {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.conta-card label {
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 15px;
+  color: #d8d8d8;
+}
+
+.conta-card input {
+  width: 100%;
+}
+
+.conta-card button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.email-atual {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  color: #b5b5b5;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 15px;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 15px;
+  background: #dc2626;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+}
+
+/* =========================================
+   EVOLUÇÃO - CALENDÁRIO E GRÁFICO
+========================================= */
+.calendario-card {
+  text-align: left;
+}
+
+.calendario-card h2 {
+  text-align: center;
+}
+
+.calendario-subtitulo {
+  color: #b5b5b5;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mes-ano-calendario {
+  text-align: center;
+  color: #8b5cf6;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.dias-semana,
+.calendario-treinos {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.dias-semana {
+  margin-bottom: 10px;
+  color: #b5b5b5;
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.dia-calendario {
+  height: 42px;
+  border-radius: 12px;
+  background: #22222c;
+  color: #b5b5b5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dia-calendario.ativo {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.35);
+}
+
+.dia-calendario.hoje {
+  border: 2px solid #8b5cf6;
+  color: #8b5cf6;
+  position: relative;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hoje-label {
+  font-size: 10px;
+  color: #8b5cf6;
+}
+
+.legenda-calendario {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 18px;
+  color: #b5b5b5;
+  font-size: 12px;
+}
+
+.legenda-calendario span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legenda-calendario b {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.dia-treino {
+  background: #8b5cf6;
+}
+
+.dia-sem-treino {
+  background: #22222c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.grafico-card,
+.grafico-semanal-card {
+  padding-bottom: 30px;
+}
+
+/* =========================================
+   TOAST / MENSAGENS
+========================================= */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.35s;
+  z-index: 9999;
+  font-size: 15px;
+  font-weight: 600;
+  background: #111111;
+  border: 1px solid #8b5cf6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.35);
+  color: white;
+}
+
+.toast.ativo {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+@media (max-width: 900px) {
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+
+  .login-ilustracao {
+    padding: 40px;
+  }
+
+  .login-card {
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-bottom: 120px;
+  }
+
+  .topo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topo h1 {
+    font-size: 26px;
+  }
+
+  .cards-resumo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mini-card {
+    padding: 18px;
+  }
+
+  .mini-card p {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .toast {
+    width: 90%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .topo h2 {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 25px 16px;
+  }
+
+  .menu-inferior {
+    width: 92%;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    padding: 12px;
+  }
+
+  .topo {
+    gap: 12px;
+  }
+
+  .acoes-topo {
+    gap: 8px;
+  }
+
+  .avatar-topo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .notificacao {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cards-resumo {
+    grid-template-columns: 1fr;
+  }
+
+  .botoes {
+    flex-direction: column;
+  }
+
+  .botoes button {
+    width: 100%;
+  }
+
+  .menu-inferior {
+    bottom: 10px;
+    padding: 10px;
+  }
+
+  .menu-inferior a {
+    font-size: 20px;
+  }
+}

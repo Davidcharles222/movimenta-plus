@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- CONFIGURAÇÕES BÁSICAS -->
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Movimenta+ | Perfil</title>
+
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ÍCONE DA ABA -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>"
+    />
+
+    <!-- ÍCONES FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- CARD PRINCIPAL PERFIL -->
+      <section class="card perfil-card">
+
+        <!-- FOTO PERFIL -->
+        <div class="foto-perfil">
+
+          <img
+            id="imagemPerfil"
+            src=""
+            alt="Foto de perfil"
+          />
+
+          <i
+            id="iconePerfil"
+            class="fa-solid fa-user"
+          ></i>
+
+        </div>
+
+        <!-- ALTERAR FOTO -->
+        <label
+          class="botao-foto"
+          for="inputFotoPerfil"
+        >
+          Alterar foto
+        </label>
+
+        <input
+          type="file"
+          id="inputFotoPerfil"
+          accept="image/*"
+          onchange="alterarFotoPerfil()"
+        />
+
+        <!-- NOME PERFIL -->
+        <h1 id="nomePerfil">
+          Usuário
+        </h1>
+
+        <p class="subtitulo">
+          Desenvolvedor • Fitness • Evolução
+        </p>
+
+        <!-- ESTATÍSTICAS -->
+        <div class="estatisticas">
+
+          <div class="info">
+            <h3>Séries concluídas</h3>
+            <p id="perfilSeries">0</p>
+          </div>
+
+          <div class="info">
+            <h3>Nível atual</h3>
+            <p id="perfilNivel">Iniciante</p>
+          </div>
+
+        </div>
+
+        <!-- CONTA -->
+        <section class="card conta-card">
+
+          <h2>Conta</h2>
+
+          <!-- E-MAIL ATUAL -->
+          <label>
+            E-mail atual
+          </label>
+
+          <div
+            class="email-atual"
+            id="emailAtual"
+          >
+            usuario@email.com
+          </div>
+
+          <!-- NOVO E-MAIL -->
+          <label for="novoEmail">
+            Novo e-mail
+          </label>
+
+          <input
+            type="email"
+            id="novoEmail"
+            placeholder="Digite novo e-mail"
+          />
+
+          <!-- SENHA ATUAL -->
+          <label for="senhaAtual">
+            Senha atual
+          </label>
+
+          <input
+            type="password"
+            id="senhaAtual"
+            placeholder="Digite sua senha atual"
+          />
+
+          <!-- NOVA SENHA -->
+          <label for="novaSenha">
+            Nova senha
+          </label>
+
+          <input
+            type="password"
+            id="novaSenha"
+            placeholder="Digite nova senha"
+          />
+
+          <!-- BOTÃO SALVAR -->
+          <button
+            type="button"
+            onclick="atualizarConta()"
+          >
+            Salvar alterações
+          </button>
+
+          <!-- BOTÃO LOGOUT -->
+          <button
+            type="button"
+            class="logout-btn"
+            onclick="logout()"
+          >
+            Sair da conta
+          </button>
+
+        </section>
+
+      </section>
+
+    </div>
+
+    <!-- MENU INFERIOR -->
+    <nav class="menu-inferior">
+
+      <a href="index.html">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Início</span>
+
+      </a>
+
+      <a href="evolucao.html">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <span>Evolução</span>
+
+      </a>
+
+      <a
+        href="perfil.html"
+        class="ativo"
+      >
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>Perfil</span>
+
+      </a>
+
+    </nav>
+
+    <script>
+
+      // =========================================
+      // VERIFICAÇÃO DE LOGIN
+      // =========================================
+
+      const usuarioLogado =
+        localStorage.getItem("usuarioLogado");
+
+      const tempoLogin =
+        localStorage.getItem("tempoLogin");
+
+      const limiteSessao =
+        30 * 60 * 1000;
+
+      if (
+        !usuarioLogado ||
+        !tempoLogin ||
+        Date.now() - Number(tempoLogin) > limiteSessao
+      ) {
+
+        localStorage.removeItem(
+          "usuarioLogado"
+        );
+
+        localStorage.removeItem(
+          "tempoLogin"
+        );
+
+        window.location.href =
+          "login.html";
+
+      }
+
+      // =========================================
+      // DADOS DO PERFIL
+      // =========================================
+
+      const total =
+        localStorage.getItem(
+          "series_" + usuarioLogado
+        ) || 0;
+
+      document.getElementById(
+        "perfilSeries"
+      ).innerText = total;
+
+      let nivel = "Iniciante";
+
+      if (total >= 5) {
+        nivel = "Intermediário";
+      }
+
+      if (total >= 15) {
+        nivel = "Avançado";
+      }
+
+      document.getElementById(
+        "perfilNivel"
+      ).innerText = nivel;
+
+      const emailSalvo =
+        localStorage.getItem(
+          "usuarioEmail"
+        );
+
+      const nomeSalvo =
+        localStorage.getItem(
+          "usuarioNome"
+        );
+
+      document.getElementById(
+        "emailAtual"
+      ).innerText = emailSalvo;
+
+      document.getElementById(
+        "nomePerfil"
+      ).innerText = nomeSalvo;
+
+      // =========================================
+      // ATUALIZAR CONTA
+      // =========================================
+
+      function atualizarConta() {
+
+        const novoEmail =
+          document.getElementById(
+            "novoEmail"
+          ).value;
+
+        const senhaAtual =
+          document.getElementById(
+            "senhaAtual"
+          ).value;
+
+        const novaSenha =
+          document.getElementById(
+            "novaSenha"
+          ).value;
+
+        const senhaSalva =
+          localStorage.getItem(
+            "usuarioSenha"
+          );
+
+        if (
+          senhaAtual !== senhaSalva
+        ) {
+
+          alert(
+            "Senha atual incorreta."
+          );
+
+          return;
+
+        }
+
+        if (novoEmail !== "") {
+
+          localStorage.setItem(
+            "usuarioEmail",
+            novoEmail
+          );
+
+          document.getElementById(
+            "emailAtual"
+          ).innerText = novoEmail;
+
+        }
+
+        if (novaSenha !== "") {
+
+          localStorage.setItem(
+            "usuarioSenha",
+            novaSenha
+          );
+
+        }
+
+        document.getElementById(
+          "novoEmail"
+        ).value = "";
+
+        document.getElementById(
+          "senhaAtual"
+        ).value = "";
+
+        document.getElementById(
+          "novaSenha"
+        ).value = "";
+
+        alert(
+          "Conta atualizada com sucesso!"
+        );
+
+      }
+
+      // =========================================
+      // FOTO PERFIL
+      // =========================================
+
+      function alterarFotoPerfil() {
+
+        const input =
+          document.getElementById(
+            "inputFotoPerfil"
+          );
+
+        const arquivo =
+          input.files[0];
+
+        if (!arquivo) {
+          return;
+        }
+
+        const leitor =
+          new FileReader();
+
+        leitor.onload =
+          function (e) {
+
+            const imagemBase64 =
+              e.target.result;
+
+            localStorage.setItem(
+              "fotoPerfil_" + usuarioLogado,
+              imagemBase64
+            );
+
+            document.getElementById(
+              "imagemPerfil"
+            ).src = imagemBase64;
+
+            document.getElementById(
+              "imagemPerfil"
+            ).style.display = "block";
+
+            document.getElementById(
+              "iconePerfil"
+            ).style.display = "none";
+
+          };
+
+        leitor.readAsDataURL(
+          arquivo
+        );
+
+      }
+
+      const fotoSalva =
+        localStorage.getItem(
+          "fotoPerfil_" + usuarioLogado
+        );
+
+      if (fotoSalva) {
+
+        document.getElementById(
+          "imagemPerfil"
+        ).src = fotoSalva;
+
+        document.getElementById(
+          "imagemPerfil"
+        ).style.display = "block";
+
+        document.getElementById(
+          "iconePerfil"
+        ).style.display = "none";
+
+      }
+
+      // =========================================
+      // LOGOUT
+      // =========================================
+
+      function logout() {
+
+        localStorage.removeItem(
+          "usuarioLogado"
+        );
+
+        localStorage.removeItem(
+          "tempoLogin"
+        );
+
+        window.location.href =
+          "login.html";
+
+      }
+
+    </script>
+
+  </body>
+</html>

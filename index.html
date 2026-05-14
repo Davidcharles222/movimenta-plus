@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- CONFIGURAÇÕES BÁSICAS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Movimenta+ | Home</title>
+
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ÍCONE DA ABA -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>"
+    />
+
+    <!-- ÍCONES FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- TOPO DO APP -->
+      <header class="topo">
+        <div>
+          <p class="saudacao" id="saudacaoUsuario">Olá 👋</p>
+          <h2>Movimente-se no seu ritmo</h2>
+        </div>
+
+        <div class="acoes-topo">
+          <button
+            type="button"
+            class="notificacao"
+            onclick="abrirLembrete()"
+            aria-label="Criar lembrete"
+          >
+            <i class="fa-solid fa-bell"></i>
+          </button>
+
+          <div class="avatar-topo">
+            <img id="fotoTopo" src="" alt="Foto do usuário" />
+            <i id="iconeTopo" class="fa-solid fa-user"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- APRESENTAÇÃO -->
+      <section class="apresentacao">
+        <h1>Movimenta+</h1>
+
+        <p class="subtitulo">
+          Exercícios ao ar livre para saúde, bem-estar e evolução no seu ritmo
+        </p>
+      </section>
+
+      <!-- CARD PRINCIPAL DO TREINO -->
+      <main>
+        <section class="card">
+          <h2>Atividade de hoje</h2>
+
+          <p class="exercicio">
+            Atividade:
+            <strong id="nomeExercicio">Agachamento Livre</strong>
+          </p>
+
+          <!-- CONFIGURAÇÃO DE INTENSIDADE -->
+          <div class="controle-intensidade">
+            <label for="intensidade">Intensidade:</label>
+
+            <select id="intensidade" onchange="alterarIntensidade()">
+              <option value="leve">Leve</option>
+              <option value="moderado">Moderado</option>
+              <option value="intenso">Intenso</option>
+            </select>
+          </div>
+
+          <!-- PERFIL DO USUÁRIO -->
+          <div class="perfil-usuario">
+            <div class="campo-perfil">
+              <label for="idadeUsuario">Faixa etária</label>
+
+              <select id="idadeUsuario" onchange="aplicarPerfilUsuario()">
+                <option>10+</option>
+                <option>18+</option>
+                <option>30+</option>
+                <option>40+</option>
+                <option>50+</option>
+                <option selected>60+</option>
+                <option>70+</option>
+              </select>
+            </div>
+
+            <div class="campo-perfil">
+              <label for="condicionamentoUsuario">Condicionamento</label>
+
+              <select
+                id="condicionamentoUsuario"
+                onchange="aplicarPerfilUsuario()"
+              >
+                <option selected>Iniciante</option>
+                <option>Intermediário</option>
+                <option>Avançado</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- OBJETIVO PRINCIPAL -->
+          <div class="objetivo-usuario">
+            <label for="objetivoUsuario">Objetivo principal</label>
+
+            <select id="objetivoUsuario" onchange="aplicarObjetivoUsuario()">
+              <option value="forca">Ganhar força</option>
+              <option value="resistencia">Melhorar resistência</option>
+              <option value="flexibilidade">Aumentar flexibilidade</option>
+            </select>
+          </div>
+
+          <!-- CRONÔMETRO CIRCULAR -->
+          <div class="circulo">
+            <svg width="220" height="220" aria-hidden="true">
+              <circle
+                cx="110"
+                cy="110"
+                r="90"
+                stroke="#2a2a35"
+                stroke-width="12"
+                fill="none"
+              ></circle>
+
+              <circle
+                id="progresso"
+                cx="110"
+                cy="110"
+                r="90"
+                stroke="#8b5cf6"
+                stroke-width="12"
+                fill="none"
+                stroke-linecap="round"
+              ></circle>
+            </svg>
+
+            <div id="tempo" aria-live="polite">30</div>
+          </div>
+
+          <!-- BOTÕES DO CRONÔMETRO -->
+          <div class="botoes">
+            <button type="button" onclick="iniciar()">Iniciar</button>
+            <button type="button" onclick="pausar()">Pausar</button>
+            <button type="button" onclick="resetar()">Resetar</button>
+          </div>
+
+          <p class="series">
+            Séries concluídas:
+            <span id="series">0</span>
+          </p>
+        </section>
+
+        <!-- MENSAGEM MOTIVACIONAL -->
+        <section class="mensagem-motivacional">
+          <p id="fraseMotivacional">
+            Cada movimento é um passo para uma vida mais saudável 💜
+          </p>
+        </section>
+
+        <!-- META DIÁRIA -->
+        <section class="meta-container">
+          <div class="meta-info">
+            <span>Meta diária</span>
+            <span id="porcentagemMeta">0%</span>
+          </div>
+
+          <div class="barra-meta">
+            <div class="progresso-meta" id="progressoMeta"></div>
+          </div>
+        </section>
+
+        <!-- ASSISTENTE DE MOVIMENTO -->
+        <section class="assistente-card">
+          <h3>🩺 Assistente de movimento</h3>
+
+          <p id="feedbackMovimento">
+            Mantenha movimentos leves e controlados para maior segurança.
+          </p>
+        </section>
+
+        <!-- CARDS DE RESUMO -->
+        <section class="cards-resumo">
+          <div class="mini-card">
+            <h3>🔥 Calorias</h3>
+            <p>
+              <span id="caloriasGastas">0</span>
+              / 300 kcal
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <h3>⏱ Tempo ativo</h3>
+            <p>
+              <span id="tempoAtivo">0</span>
+              / 30 min
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <h3>🎯 Meta diária</h3>
+            <p id="metaDiaria">0/5</p>
+          </div>
+
+          <div class="mini-card">
+            <h3>💪 Séries feitas</h3>
+            <p id="miniSeries">0</p>
+          </div>
+        </section>
+
+        <!-- PRÓXIMO TREINO -->
+        <section class="proximo-treino">
+          <div class="titulo-secao">
+            <h2>Próximo treino</h2>
+          </div>
+
+          <div class="treino-card" onclick="iniciarTreinoSuperior()">
+            <div>
+              <p class="categoria" id="categoriaTreino">Mobilidade • Saúde</p>
+
+              <h3 id="tituloProximoTreino">Treino Funcional</h3>
+
+              <p class="duracao" id="descricaoProximoTreino">
+                3 atividades • ritmo adaptado
+              </p>
+            </div>
+
+            <button type="button" class="btn-play" aria-label="Iniciar treino">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- MENU INFERIOR -->
+    <nav class="menu-inferior">
+      <a href="index.html" class="ativo">
+        <i class="fa-solid fa-house"></i>
+        <span>Início</span>
+      </a>
+
+      <a href="evolucao.html">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Evolução</span>
+      </a>
+
+      <a href="perfil.html">
+        <i class="fa-solid fa-user"></i>
+        <span>Perfil</span>
+      </a>
+    </nav>
+
+    <!-- SOM DE NOTIFICAÇÃO -->
+    <audio id="somNotificacao">
+      <source
+        src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <!-- TOAST DE MENSAGENS -->
+    <div id="toast" class="toast">
+      <span id="toastMensagem"></span>
+    </div>
+
+    <!-- SCRIPT PRINCIPAL -->
+    <script src="script.js"></script>
+  </body>
+</html>

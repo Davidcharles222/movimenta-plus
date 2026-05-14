@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- CONFIGURAÇÕES BÁSICAS -->
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Movimenta+ | Cadastro</title>
+
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ÍCONE DA ABA -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>"
+    />
+  </head>
+
+  <body class="login-body">
+
+    <div class="login-container">
+
+      <!-- ILUSTRAÇÃO / APRESENTAÇÃO -->
+      <section class="login-ilustracao">
+
+        <h1>Movimenta+</h1>
+
+        <p>
+          Crie sua conta e personalize
+          seus exercícios ao ar livre
+          conforme seu ritmo.
+        </p>
+
+        <div class="icone-praca">
+          🌳🤸‍♂️☀️
+        </div>
+
+      </section>
+
+      <!-- CARD DE CADASTRO -->
+      <main class="login-card">
+
+        <h2>Criar conta</h2>
+
+        <p class="login-subtitulo">
+          Cadastre seus dados para começar
+        </p>
+
+        <!-- CAMPO NOME -->
+        <label for="nomeCadastro">
+          Nome
+        </label>
+
+        <input
+          type="text"
+          id="nomeCadastro"
+          placeholder="Digite seu nome"
+          autocomplete="name"
+        />
+
+        <!-- CAMPO E-MAIL -->
+        <label for="emailCadastro">
+          E-mail
+        </label>
+
+        <input
+          type="email"
+          id="emailCadastro"
+          placeholder="Digite seu e-mail"
+          autocomplete="email"
+        />
+
+        <!-- CAMPO SENHA -->
+        <label for="senhaCadastro">
+          Senha
+        </label>
+
+        <input
+          type="password"
+          id="senhaCadastro"
+          placeholder="Crie uma senha"
+          autocomplete="new-password"
+        />
+
+        <!-- BOTÃO CADASTRO -->
+        <button
+          type="button"
+          onclick="fazerCadastro()"
+        >
+          Cadastrar
+        </button>
+
+        <!-- LINK LOGIN -->
+        <p class="login-link">
+
+          Já tem conta?
+
+          <a href="login.html">
+            Fazer login
+          </a>
+
+        </p>
+
+      </main>
+
+    </div>
+
+    <!-- SCRIPT DE AUTENTICAÇÃO -->
+    <script src="auth.js"></script>
+
+  </body>
+</html>

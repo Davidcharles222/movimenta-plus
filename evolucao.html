@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- CONFIGURAÇÕES BÁSICAS -->
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Movimenta+ | Evolução</title>
+
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ÍCONE DA ABA -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>"
+    />
+
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- CHART.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- TÍTULO -->
+      <header>
+        <h1>Sua Evolução</h1>
+
+        <p class="subtitulo">Acompanhe seu desempenho</p>
+      </header>
+
+      <!-- RESUMO GERAL -->
+      <section class="card">
+        <h2>Total de séries</h2>
+
+        <div class="estatisticas">
+          <div class="info">
+            <h3>Séries concluídas</h3>
+            <p id="totalSeries">0</p>
+          </div>
+
+          <div class="info">
+            <h3>Exercício atual</h3>
+            <p id="exercicioAtual">-</p>
+          </div>
+
+          <div class="info">
+            <h3>Nível</h3>
+            <p id="nivelUsuario">Iniciante</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALENDÁRIO -->
+      <section class="card calendario-card">
+        <h2>Calendário de treinos</h2>
+
+        <p class="calendario-subtitulo">Dias em que você se movimentou</p>
+
+        <h3 id="mesAnoCalendario" class="mes-ano-calendario">Mês Ano</h3>
+
+        <!-- DIAS DA SEMANA -->
+        <div class="dias-semana">
+          <span>Dom</span>
+          <span>Seg</span>
+          <span>Ter</span>
+          <span>Qua</span>
+          <span>Qui</span>
+          <span>Sex</span>
+          <span>Sáb</span>
+        </div>
+
+        <!-- CALENDÁRIO DINÂMICO -->
+        <div id="calendarioTreinos" class="calendario-treinos"></div>
+
+        <!-- LEGENDA -->
+        <div class="legenda-calendario">
+          <span>
+            <b class="dia-treino"></b>
+            Dia com treino
+          </span>
+
+          <span>
+            <b class="dia-sem-treino"></b>
+            Sem treino
+          </span>
+        </div>
+      </section>
+
+      <!-- GRÁFICO SEMANAL -->
+      <section class="card grafico-semanal-card">
+        <h2>Séries da semana</h2>
+
+        <p class="calendario-subtitulo">
+          Comparativo entre séries realizadas e meta diária
+        </p>
+
+        <canvas id="graficoSemanal"></canvas>
+      </section>
+
+      <br />
+
+      <!-- BOTÃO VOLTAR -->
+      <button type="button" onclick="voltar()">Voltar</button>
+    </div>
+
+    <script>
+      // =========================================
+      // VERIFICAÇÃO LOGIN
+      // =========================================
+
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
+
+      const tempoLogin = localStorage.getItem("tempoLogin");
+
+      const limiteSessao = 30 * 60 * 1000;
+
+      if (
+        !usuarioLogado ||
+        !tempoLogin ||
+        Date.now() - Number(tempoLogin) > limiteSessao
+      ) {
+        localStorage.removeItem("usuarioLogado");
+
+        localStorage.removeItem("tempoLogin");
+
+        window.location.href = "login.html";
+      }
+
+      // =========================================
+      // DADOS USUÁRIO
+      // =========================================
+
+      const total = localStorage.getItem("series_" + usuarioLogado) || 0;
+
+      const exercicios = [
+        "Alongamento de braços",
+        "Caminhada leve",
+        "Elevação de joelhos",
+        "Agachamento assistido",
+        "Exercício no simulador de caminhada",
+        "Rotação de ombros",
+        "Subida no step baixo",
+        "Alongamento de pernas",
+      ];
+
+      const exercicioAtual =
+        localStorage.getItem("exercicioAtual_" + usuarioLogado) || 0;
+
+      document.getElementById("totalSeries").innerText = total;
+
+      const nomeExercicioSalvo = localStorage.getItem(
+        "nomeExercicioAtual_" + usuarioLogado,
+      );
+
+      document.getElementById("exercicioAtual").innerText =
+        nomeExercicioSalvo || exercicios[exercicioAtual];
+
+      // =========================================
+      // NÍVEL USUÁRIO
+      // =========================================
+
+      let nivel = "Iniciante";
+
+      if (total >= 5) {
+        nivel = "Intermediário";
+      }
+
+      if (total >= 15) {
+        nivel = "Avançado";
+      }
+
+      document.getElementById("nivelUsuario").innerText = nivel;
+
+      // =========================================
+      // CALENDÁRIO TREINOS
+      // =========================================
+
+      function gerarCalendarioTreinos() {
+        const calendario = document.getElementById("calendarioTreinos");
+
+        calendario.innerHTML = "";
+
+        const hoje = new Date();
+
+        const diaAtual = hoje.getDate();
+
+        const meses = [
+          "Janeiro",
+          "Fevereiro",
+          "Março",
+          "Abril",
+          "Maio",
+          "Junho",
+          "Julho",
+          "Agosto",
+          "Setembro",
+          "Outubro",
+          "Novembro",
+          "Dezembro",
+        ];
+
+        const ano = hoje.getFullYear();
+
+        const mes = hoje.getMonth();
+
+        document.getElementById("mesAnoCalendario").innerText =
+          meses[mes] + " " + ano;
+
+        const totalDias = new Date(ano, mes + 1, 0).getDate();
+
+        const diasComTreino =
+          JSON.parse(localStorage.getItem("diasTreinados_" + usuarioLogado)) ||
+          [];
+
+        for (let dia = 1; dia <= totalDias; dia++) {
+          const div = document.createElement("div");
+
+          div.classList.add("dia-calendario");
+
+          if (dia === diaAtual) {
+            div.innerHTML = dia + "<span class='hoje-label'>Hoje</span>";
+
+            div.classList.add("hoje");
+          } else {
+            div.innerText = dia;
+          }
+
+          if (diasComTreino.includes(dia)) {
+            div.classList.add("ativo");
+          }
+
+          calendario.appendChild(div);
+        }
+      }
+
+      // =========================================
+      // GRÁFICO SEMANAL
+      // =========================================
+
+      function gerarGraficoSemanal() {
+        const ctx = document.getElementById("graficoSemanal");
+
+        const meta = 5;
+
+        const hoje = new Date().getDay();
+
+        const seriesSemana = [0, 0, 0, 0, 0, 0, 0];
+
+        seriesSemana[hoje] = Number(total);
+
+        new Chart(ctx, {
+          type: "bar",
+
+          data: {
+            labels: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+
+            datasets: [
+              {
+                label: "Séries realizadas",
+
+                data: seriesSemana,
+
+                backgroundColor: "#8b5cf6",
+
+                borderRadius: 8,
+              },
+
+              {
+                type: "line",
+
+                label: "Meta diária",
+
+                data: [meta, meta, meta, meta, meta, meta, meta],
+
+                borderColor: "#ffffff",
+
+                borderWidth: 2,
+
+                pointRadius: 0,
+              },
+            ],
+          },
+
+          options: {
+            animation: true,
+
+            plugins: {
+              legend: {
+                labels: {
+                  color: "white",
+                },
+              },
+            },
+
+            scales: {
+              x: {
+                ticks: {
+                  color: function (context) {
+                    return context.index === hoje ? "#8b5cf6" : "white";
+                  },
+
+                  font: function (context) {
+                    return {
+                      weight: context.index === hoje ? "bold" : "normal",
+                    };
+                  },
+                },
+              },
+
+              y: {
+                beginAtZero: true,
+
+                ticks: {
+                  color: "white",
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // =========================================
+      // VOLTAR HOME
+      // =========================================
+
+      function voltar() {
+        window.location.href = "index.html";
+      }
+
+      // =========================================
+      // INICIALIZAÇÃO
+      // =========================================
+
+      gerarCalendarioTreinos();
+
+      gerarGraficoSemanal();
+    </script>
+  </body>
+</html>
