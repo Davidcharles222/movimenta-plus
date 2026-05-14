@@ -217,5 +217,3 @@ https://movimenta-plus.vercel.app/login.html
 # 👨‍💻 Desenvolvedor
 
 Desenvolvido por David Charles 💜
-
-LinkedIn e GitHub serão adicionados futuramente.
