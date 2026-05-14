@@ -168,14 +168,7 @@ https://movimenta-plus.vercel.app/login.html
 
 ---
 
-# 📸 Preview do projeto
-
-As imagens do projeto serão adicionadas após finalização da interface.
-
-Exemplo:
-
-```md
-## 📸 Preview
+# 📸 Preview
 
 ### Login
 
@@ -192,7 +185,7 @@ Exemplo:
 ### Perfil
 
 ![Perfil](assets/img/perfil.png)
-```
+
 
 ---
 
