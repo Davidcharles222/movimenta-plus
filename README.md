@@ -168,29 +168,37 @@ https://movimenta-plus.vercel.app/login.html
 
 ---
 
-# 📸 Preview
+# 📸 Preview do projeto
 
-## 🔐 Login
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <h3>🔐 Login</h3>
+      <img src="assets/img/login.png" width="100%">
+    </td>
+    <td align="center" width="50%">
+      <h3>📝 Cadastro</h3>
+      <img src="assets/img/cadastro.png" width="100%">
+    </td>
+  </tr>
+</table>
 
-<img src="assets/img/login.png" height="420">
-
----
-
-## 🏠 Home
-
-<img src="assets/img/home.png" height="420">
-
----
-
-## 📈 Evolução
-
-<img src="assets/img/evolucao.png" height="420">
-
----
-
-## 👤 Perfil
-
-<img src="assets/img/perfil.png" height="420">
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <h3>🏠 Home</h3>
+      <img src="assets/img/home.png" width="260">
+    </td>
+    <td align="center" width="33%">
+      <h3>📈 Evolução</h3>
+      <img src="assets/img/evolucao.png" width="260">
+    </td>
+    <td align="center" width="33%">
+      <h3>👤 Perfil</h3>
+      <img src="assets/img/perfil.png" width="260">
+    </td>
+  </tr>
+</table>
 
 ---
 
