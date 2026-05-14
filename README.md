@@ -170,13 +170,27 @@ https://movimenta-plus.vercel.app/login.html
 
 # 📸 Preview
 
-| Login | Home |
-|---|---|
-| <img src="assets/img/login.png" width="400"> | <img src="assets/img/home.png" width="220"> |
+## 🔐 Login
 
-| Evolução | Perfil |
-|---|---|
-| <img src="assets/img/evolucao.png" width="220"> | <img src="assets/img/perfil.png" width="220"> |
+<img src="assets/img/login.png" height="420">
+
+---
+
+## 🏠 Home
+
+<img src="assets/img/home.png" height="420">
+
+---
+
+## 📈 Evolução
+
+<img src="assets/img/evolucao.png" height="420">
+
+---
+
+## 👤 Perfil
+
+<img src="assets/img/perfil.png" height="420">
 
 ---
 
