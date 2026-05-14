@@ -9,6 +9,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 # 🚀 Funcionalidades
 
 ## 🔐 Autenticação
+
 - Cadastro de usuário
 - Login
 - Recuperação de senha
@@ -17,6 +18,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 ---
 
 ## 🏋️ Treinos inteligentes
+
 - Exercícios adaptados ao perfil do usuário
 - Alteração dinâmica de:
   - intensidade
@@ -27,6 +29,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 ---
 
 ## ⏱ Cronômetro interativo
+
 - Iniciar treino
 - Pausar treino
 - Resetar treino
@@ -35,6 +38,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 ---
 
 ## 📈 Evolução do usuário
+
 - Séries concluídas
 - Tempo ativo
 - Calorias gastas
@@ -43,12 +47,14 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 ---
 
 ## 📅 Calendário de treinos
+
 - Dias treinados destacados
 - Persistência com LocalStorage
 
 ---
 
 ## 📊 Gráfico semanal
+
 - Comparativo entre:
   - séries realizadas
   - meta diária
@@ -56,6 +62,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 ---
 
 ## 🔔 Notificações
+
 - Toast personalizado
 - Som de alerta
 - Lembretes de treino
@@ -63,6 +70,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 ---
 
 ## 👤 Perfil do usuário
+
 - Alteração de foto
 - Alteração de e-mail
 - Alteração de senha
@@ -84,6 +92,7 @@ O projeto foi criado com foco em saúde, bem-estar e evolução progressiva, per
 # 🎨 Layout
 
 O projeto possui:
+
 - design responsivo
 - interface moderna
 - tema escuro
@@ -166,7 +175,23 @@ As imagens do projeto serão adicionadas após finalização da interface.
 Exemplo:
 
 ```md
+## 📸 Preview
+
+### Login
+
+![Login](assets/img/login.png)
+
+### Home
+
 ![Home](assets/img/home.png)
+
+### Evolução
+
+![Evolução](assets/img/evolucao.png)
+
+### Perfil
+
+![Perfil](assets/img/perfil.png)
 ```
 
 ---
